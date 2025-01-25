@@ -15,5 +15,8 @@
     "url": "https://github.com/Nida-Naz-93/Blogging-Website1/issues"
   },
   "homepage": "https://github.com/Nida-Naz-93/Blogging-Website1#readme",
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "stylelint-config-standard": "^37.0.0"
+  }
 }
