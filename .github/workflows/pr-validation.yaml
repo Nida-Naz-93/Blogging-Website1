@@ -1,4 +1,4 @@
-name: wf-develop-pr
+name: Pull Request Validation
 
 on:
   pull_request:
@@ -6,17 +6,24 @@ on:
       - develop
 
 jobs:
-  develop-pr-job:
+  linting-job:
+    name: Lint HTML and CSS Files
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout Repository
         uses: actions/checkout@v4
 
-      - name: Lint HTML and CSS assets
-        run: |
-          npx htmlhint "**/*.html"
-          npx stylelint "**/*.css"
+      - name: Install HTMLHint
+        run: npm install --save-dev htmlhint
 
-      - name: Build websitegit 
-        run: |
-          npx parcel build "./src/index.html" --dist-dir "./dist" --public-url "./"
+      - name: Install Stylelint
+        run: npm install --save-dev stylelint stylelint-config-standard
+
+      - name: Fix Permissions for Stylelint
+        run: chmod +x ./node_modules/.bin/stylelint
+
+      - name: Lint HTML Files
+        run: npx htmlhint "**/*.html"
+
+      - name: Lint CSS Files
+        run: npx stylelint "**/*.css"
